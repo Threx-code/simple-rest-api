@@ -12,7 +12,7 @@ class TaskHelper
      */
     public static function randomNumber(): int
     {
-        return random_int(1, 1000);
+        return random_int(23, 1000);
     }
 
     /**

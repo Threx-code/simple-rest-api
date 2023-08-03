@@ -2,18 +2,18 @@
 
 namespace App\Transformers;
 
+use App\Validators\ValidatorResponse;
 use Carbon\Carbon;
 
 class AllTaskTransformer
 {
-    public static function transform($tasks)
+    /**
+     * @param $tasks
+     * @return array
+     */
+    public static function transform($tasks): array
     {
-        if(empty($tasks)){
-            return [];
-        }
-        
         $data = [];
-
         $tasks->each(function ($task, $key) use(&$data) {
             $data[$key]['id'] = $task->id;
             $data[$key]['title'] = ucwords($task->title);
@@ -25,6 +25,14 @@ class AllTaskTransformer
             $data[$key]['created_at'] = Carbon::parse($task->created_at)->format('Y-m-d');
             $data[$key]['updated_at'] = Carbon::parse($task->updated_at)->format('Y-m-d');
         });
+
+        if(empty($data)){
+            ValidatorResponse::validationErrors(
+                'Tasks not found',
+                'Sorry there are no resources',
+                404,
+                'not_found');
+        }
 
         return $data;
     }

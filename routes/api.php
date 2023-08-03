@@ -17,9 +17,9 @@ use App\Http\Controllers\V1\TaskController;
 Route::middleware([])
     ->prefix('/v1/')
     ->group(function () {
-        Route::get('/tasks', [TaskController::class, 'getAllTasks']);
+        Route::get('/tasks', [TaskController::class, 'getAllTasks'])->name('all_tasks');
 
-        Route::get('/tasks/{id}', [TaskController::class, 'getATask']);
+        Route::get('/tasks/{id}', [TaskController::class, 'getATask'])->name('single_task');
 
         Route::middleware(['tasks.file.processor'])->group(function () {
             Route::post('/tasks', [TaskController::class, 'store']);
