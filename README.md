@@ -9,7 +9,8 @@ This application requires PHP ^8.1
 - composer install
 - docker compose build
 - docker compose ps -a (To see the list of containers started) 
-- docker exec Laravel_php -it /bin/sh
+- docker compose up -d
+- docker exec -it Laravel_php /bin/sh
 - php artisan migrate (to run migration files)
 - Create your database
 - Copy .env.example and rename it to .env
